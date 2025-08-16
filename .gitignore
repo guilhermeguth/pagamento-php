@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+vendor/
+.env
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+backend/bootstrap/cache/
+backend/database/
+frontend/dist/
+*.log
+docker/data/
+.phpunit.result.cache
