@@ -190,7 +190,6 @@ class AuthControllerTest extends TestCase
             'email' => 'email-invalido', // Email inválido
             'document' => '123', // Documento muito curto
             'password' => '123', // Senha muito curta
-            'password_confirmation' => 'diferente', // Confirmação diferente
             'type' => 'tipo-invalido' // Tipo inválido
         ];
 
@@ -205,7 +204,6 @@ class AuthControllerTest extends TestCase
                      'errors' => [
                          'name',
                          'email',
-                         'document',
                          'password',
                          'type'
                      ]

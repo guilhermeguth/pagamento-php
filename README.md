@@ -25,3 +25,20 @@ chmod +x init.sh
 3. Acesse a aplicação:
 - Frontend: http://localhost:5173
 - Backend API: http://localhost/api
+
+## Executar testes
+
+Executar todos os testes:
+```bash
+docker compose exec php php artisan test
+```
+
+Executar apenas testes unitários:
+```bash
+docker compose exec php php artisan test --testsuite=Unit
+```
+
+Executar apenas testes de funcionalidade:
+```bash
+docker compose exec php php artisan test --testsuite=Feature
+```
