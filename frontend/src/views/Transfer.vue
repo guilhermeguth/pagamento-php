@@ -135,7 +135,6 @@ export default {
       isLoading.value = true
 
       try {
-        // Primeiro, buscar o usuário por email
         const userResponse = await api.get('/users/find-by-email', {
           params: { email: form.value.payee_email }
         })
@@ -146,7 +145,6 @@ export default {
 
         const recipient = userResponse.data.data
         
-        // Agora fazer a transferência usando o ID do usuário
         const transferResponse = await api.post('/transfers', {
           recipient_id: recipient.id,
           amount: parseFloat(form.value.amount),
@@ -156,17 +154,14 @@ export default {
         if (transferResponse.data.success) {
           success.value = `Transferência realizada com sucesso para ${recipient.name}!`
           
-          // Atualiza o saldo do usuário
           authStore.fetchUser()
           
-          // Limpa o formulário
           form.value = {
             payee_email: '',
             amount: '',
             description: ''
           }
           
-          // Redireciona após 3 segundos
           setTimeout(() => {
             router.push('/transactions')
           }, 3000)

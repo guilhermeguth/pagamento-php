@@ -51,7 +51,6 @@ class SanctumGuard implements Guard
             return null;
         }
 
-        // Buscar o token no banco de dados
         $entityManager = app(EntityManagerInterface::class);
         $tokenRepository = $entityManager->getRepository(PersonalAccessToken::class);
         
@@ -61,12 +60,10 @@ class SanctumGuard implements Guard
             return null;
         }
 
-        // Verificar se o token não expirou
         if ($accessToken->getExpiresAt() && $accessToken->getExpiresAt() < new \DateTime()) {
             return null;
         }
 
-        // Buscar o usuário
         $this->user = $this->provider->retrieveById($accessToken->getTokenableId());
         
         if ($this->user) {

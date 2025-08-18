@@ -74,9 +74,9 @@ docker compose exec node npm install
 echo "Testando funcionalidades principais..."
 # Testar rota de saúde da API
 if curl -f -s http://localhost/api/health > /dev/null 2>&1; then
-    echo "✓ API Health check: OK"
+    echo "API Health check: OK"
 else
-    echo "⚠ API Health check: Aguardando..."
+    echo "API Health check: Aguardando..."
     sleep 3
 fi
 

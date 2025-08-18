@@ -7,7 +7,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        <!-- Saldo -->
         <div class="card">
           <div class="flex items-center">
             <div class="p-2 bg-green-100 rounded-lg">
@@ -24,7 +23,6 @@
           </div>
         </div>
 
-        <!-- Tipo de usuário -->
         <div class="card">
           <div class="flex items-center">
             <div class="p-2 bg-blue-100 rounded-lg">
@@ -41,7 +39,6 @@
           </div>
         </div>
 
-        <!-- Documento -->
         <div class="card">
           <div class="flex items-center">
             <div class="p-2 bg-purple-100 rounded-lg">
@@ -57,7 +54,6 @@
         </div>
       </div>
 
-      <!-- Ações rápidas -->
       <div class="card">
         <h2 class="text-lg font-semibold text-gray-900 mb-4">Ações Rápidas</h2>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -104,7 +100,6 @@
         </div>
       </div>
 
-      <!-- Modal de depósito -->
       <div v-if="showDepositModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 w-full max-w-md">
           <h3 class="text-lg font-semibold mb-4">Depositar Dinheiro</h3>
@@ -140,7 +135,6 @@
         </div>
       </div>
 
-      <!-- Modal de saque -->
       <div v-if="showWithdrawModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 w-full max-w-md">
           <h3 class="text-lg font-semibold mb-4">Sacar Dinheiro</h3>
@@ -221,7 +215,7 @@ export default {
         })
         
         if (response.data.success) {
-          authStore.fetchUser() // Atualiza o saldo
+          authStore.fetchUser()
           showDepositModal.value = false
           alert('Depósito realizado com sucesso!')
         }
@@ -234,7 +228,6 @@ export default {
       try {
         const amount = parseFloat(withdrawAmount.value)
         
-        // Verificação de saldo
         if (amount > (authStore.user?.balance || 0)) {
           alert('Saldo insuficiente para realizar o saque')
           return

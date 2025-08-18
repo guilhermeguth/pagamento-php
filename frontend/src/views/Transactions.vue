@@ -174,7 +174,6 @@ export default {
         const response = await api.get(`/transactions?type=${selectedFilter.value}`)
         const rawTransactions = response.data.data.transactions || []
         
-        // Mapear os dados para o formato esperado pelo frontend
         transactions.value = rawTransactions.map(transaction => {
           let mappedTransaction = {
             id: transaction.id,
@@ -187,9 +186,7 @@ export default {
             original_type: transaction.type
           }
 
-          // Mapear o tipo e informações do usuário baseado no tipo da transação e user_role
           if (transaction.type === 'refund') {
-            // Para estornos, quem fez o estorno aparece como "sender"
             if (transaction.user_role === 'sender') {
               mappedTransaction.type = 'sent'
               mappedTransaction.other_user_name = transaction.payee ? transaction.payee.name : 'Sistema'
@@ -207,7 +204,6 @@ export default {
               mappedTransaction.other_user_name = transaction.payee.name
               mappedTransaction.other_user_email = transaction.payee.type === 'merchant' ? 'Lojista' : 'Usuário'
             } else {
-              // Para saques, não há destinatário
               mappedTransaction.other_user_name = 'Saque'
               mappedTransaction.other_user_email = ''
             }
@@ -217,7 +213,6 @@ export default {
               mappedTransaction.other_user_name = transaction.payer.name
               mappedTransaction.other_user_email = transaction.payer.type === 'merchant' ? 'Lojista' : 'Usuário'
             } else {
-              // Para depósitos, não há remetente
               mappedTransaction.other_user_name = 'Depósito'
               mappedTransaction.other_user_email = ''
             }
@@ -244,8 +239,8 @@ export default {
         
         if (response.data.success) {
           alert('Transação estornada com sucesso!')
-          loadTransactions() // Recarrega a lista
-          authStore.fetchUser() // Atualiza o saldo
+          loadTransactions()
+          authStore.fetchUser()
         }
       } catch (error) {
         alert('Erro ao estornar transação: ' + (error.response?.data?.message || 'Erro desconhecido'))

@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Registrar repositórios
         $this->app->singleton(UserRepository::class, function ($app) {
             return new UserRepository($app->make(EntityManagerInterface::class));
         });
@@ -28,7 +27,6 @@ class AppServiceProvider extends ServiceProvider
             return new TransactionRepository($app->make(EntityManagerInterface::class));
         });
 
-        // Registrar serviços externos
         $this->app->singleton(AuthorizationService::class, function ($app) {
             return new AuthorizationService();
         });
@@ -37,7 +35,6 @@ class AppServiceProvider extends ServiceProvider
             return new NotificationService();
         });
 
-        // Registrar services de negócio
         $this->app->singleton(UserService::class, function ($app) {
             return new UserService($app->make(UserRepository::class));
         });
@@ -66,6 +63,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
     }
 }

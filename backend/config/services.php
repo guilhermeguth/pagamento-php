@@ -35,7 +35,6 @@ return [
         ],
     ],
 
-    // Serviços externos do sistema de pagamento
     'external_auth' => [
         'url' => env('EXTERNAL_AUTH_SERVICE_URL', 'https://util.devi.tools/api/v2/authorize'),
         'timeout' => env('EXTERNAL_AUTH_TIMEOUT', 10),

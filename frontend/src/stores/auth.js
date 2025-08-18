@@ -10,7 +10,6 @@ export const useAuthStore = defineStore('auth', {
 
   getters: {
     isAuthenticated: (state) => {
-      // Se tem token, considera autenticado (mesmo que o usuário ainda não foi carregado)
       return !!state.token
     },
     hasUserData: (state) => !!state.user,
@@ -86,7 +85,6 @@ export const useAuthStore = defineStore('auth', {
         return true
       } catch (error) {
         console.error('Erro ao buscar usuário:', error)
-        // Só faz logout se for erro 401 (token inválido)
         if (error.response?.status === 401) {
           this.logout()
           return false
@@ -98,7 +96,6 @@ export const useAuthStore = defineStore('auth', {
     async initializeAuth() {
       if (this.token) {
         api.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
-        // Tentar buscar os dados do usuário
         await this.fetchUser()
       }
     }

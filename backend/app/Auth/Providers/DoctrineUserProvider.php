@@ -31,7 +31,6 @@ class DoctrineUserProvider implements UserProvider
      */
     public function retrieveByToken($identifier, $token): ?Authenticatable
     {
-        // Para implementação futura do remember token
         return null;
     }
 
@@ -40,7 +39,6 @@ class DoctrineUserProvider implements UserProvider
      */
     public function updateRememberToken(Authenticatable $user, $token): void
     {
-        // Para implementação futura do remember token
     }
 
     /**
@@ -82,6 +80,5 @@ class DoctrineUserProvider implements UserProvider
      */
     public function rehashPasswordIfRequired(Authenticatable $user, array $credentials, bool $force = false): void
     {
-        // Implementação opcional para rehash de senha
     }
 }

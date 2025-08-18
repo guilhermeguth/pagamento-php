@@ -144,12 +144,10 @@ export default {
       let value = event.target.value.replace(/\D/g, '')
       
       if (value.length <= 11) {
-        // CPF
         value = value.replace(/(\d{3})(\d)/, '$1.$2')
         value = value.replace(/(\d{3})(\d)/, '$1.$2')
         value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2')
       } else {
-        // CNPJ
         value = value.replace(/^(\d{2})(\d)/, '$1.$2')
         value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
         value = value.replace(/\.(\d{3})(\d)/, '.$1/$2')

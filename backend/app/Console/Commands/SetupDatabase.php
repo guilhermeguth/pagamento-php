@@ -35,36 +35,33 @@ class SetupDatabase extends Command
      */
     public function handle()
     {
-        $this->info('🏗️ Configurando banco de dados...');
+        $this->info('Configurando banco de dados...');
 
         try {
-            // Verifica se as tabelas já existem
             $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
             
             if ($schemaManager->tablesExist(['users']) && !$this->option('force')) {
-                $this->info('✅ Banco de dados já configurado.');
+                $this->info('Banco de dados já configurado.');
                 return 0;
             }
 
             if ($this->option('force')) {
-                $this->warn('⚠️ Forçando recriação do banco...');
+                $this->warn('Forçando recriação do banco...');
                 $this->call('doctrine:schema:drop', ['--force' => true]);
             }
 
-            // Cria schema
             $this->call('doctrine:schema:create');
-            $this->info('✅ Schema criado com sucesso!');
+            $this->info('Schema criado com sucesso!');
 
-            // Cria usuário admin
             $this->createAdminUser();
 
-            $this->info('🎉 Banco de dados configurado com sucesso!');
-            $this->info('👤 Login: admin@sistema.com | Senha: admin123');
+            $this->info('Banco de dados configurado com sucesso!');
+            $this->info('Login: admin@sistema.com | Senha: admin123');
 
             return 0;
 
         } catch (\Exception $e) {
-            $this->error('❌ Erro ao configurar banco: ' . $e->getMessage());
+            $this->error('Erro ao configurar banco: ' . $e->getMessage());
             return 1;
         }
     }
@@ -72,12 +69,11 @@ class SetupDatabase extends Command
     private function createAdminUser(): void
     {
         try {
-            // Verifica se admin já existe
             $userRepository = $this->entityManager->getRepository(User::class);
             $existingUser = $userRepository->findOneBy(['email' => 'admin@sistema.com']);
 
             if ($existingUser) {
-                $this->info('ℹ️ Usuário admin já existe.');
+                $this->info('Usuário admin já existe.');
                 return;
             }
 
@@ -92,10 +88,10 @@ class SetupDatabase extends Command
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $this->info('✅ Usuário admin criado com sucesso!');
+            $this->info('Usuário admin criado com sucesso!');
 
         } catch (\Exception $e) {
-            $this->warn('⚠️ Erro ao criar usuário admin: ' . $e->getMessage());
+            $this->warn('Erro ao criar usuário admin: ' . $e->getMessage());
         }
     }
 }

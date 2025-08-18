@@ -34,7 +34,6 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
         });
     }
 
@@ -43,7 +42,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e): Response|JsonResponse
     {
-        // Handle API requests with JSON responses
         if ($request->expectsJson()) {
             return $this->handleApiException($request, $e);
         }
@@ -89,7 +87,6 @@ class Handler extends ExceptionHandler
                 break;
 
             default:
-                // Log the exception for debugging
                 Log::error('API Exception', [
                     'exception' => get_class($exception),
                     'message' => $exception->getMessage(),
@@ -104,7 +101,6 @@ class Handler extends ExceptionHandler
                     ]
                 ]);
 
-                // Don't expose internal errors in production
                 if (!config('app.debug')) {
                     $message = 'Erro interno do servidor';
                 } else {
@@ -122,7 +118,6 @@ class Handler extends ExceptionHandler
             $response['errors'] = $errors;
         }
 
-        // Add debug information in development
         if (config('app.debug')) {
             $response['debug'] = [
                 'exception' => get_class($exception),

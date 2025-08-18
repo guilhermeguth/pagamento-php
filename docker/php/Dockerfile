@@ -1,6 +1,5 @@
 FROM php:8.2-fpm-alpine
 
-# Install system dependencies
 RUN apk add --no-cache \
     git \
     curl \
@@ -12,18 +11,14 @@ RUN apk add --no-cache \
     oniguruma-dev \
     libzip-dev
 
-# Install PHP extensions
 RUN docker-php-ext-install \
     pdo \
     pdo_pgsql
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Set permissions for www-data user
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 9000
